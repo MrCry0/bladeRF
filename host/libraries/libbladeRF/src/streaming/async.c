@@ -77,6 +77,10 @@ int async_init_stream(struct bladerf_stream **stream,
         return BLADERF_ERR_INVAL;
     }
 
+    if (((layout & BLADERF_DIRECTION_MASK) == BLADERF_RX) && !buffers) {
+        log_error("Buffer should not be NULL for BLADERF_RX\n");
+        return BLADERF_ERR_INVAL;
+    }
     /* Create a stream and populate it with the appropriate information */
     lstream = malloc(sizeof(struct bladerf_stream));
 
@@ -129,50 +133,53 @@ int async_init_stream(struct bladerf_stream **stream,
         }
     }
 
-    if (!status) {
+    if (buffers)
         lstream->buffers = calloc(num_buffers, sizeof(lstream->buffers[0]));
-        if (lstream->buffers) {
-            for (i = 0; i < num_buffers && !status; i++) {
-                lstream->buffers[i] = calloc(1, buffer_size_bytes);
-                if (!lstream->buffers[i]) {
-                    status = BLADERF_ERR_MEM;
-                }
-            }
-        } else {
-            status = BLADERF_ERR_MEM;
+    else
+        lstream->buffers = NULL;
+
+    if (lstream->buffers) {
+        for (i = 0; i < num_buffers && !status; i++) {
+            lstream->buffers[i] = calloc(1, buffer_size_bytes);
+            if (!lstream->buffers[i])
+                status = BLADERF_ERR_MEM;
         }
-    }
-
-    /* Clean up everything we've allocated if we hit any errors */
-    if (status) {
-
-        if (lstream->buffers) {
-            for (i = 0; i < num_buffers; i++) {
-                free(lstream->buffers[i]);
-            }
-
-            free(lstream->buffers);
-        }
-
-        free(lstream);
     } else {
-        /* Perform any backend-specific stream initialization */
-        status = dev->backend->init_stream(lstream, num_transfers);
+        if (buffers)
+            status = BLADERF_ERR_MEM;
+    }
 
-        if (status < 0) {
-            async_deinit_stream(lstream);
-            *stream = NULL;
-        } else {
-            /* Update the caller's pointers */
-            *stream = lstream;
+    if (status)
+	goto freemem;
 
-            if (buffers) {
-                *buffers = lstream->buffers;
-            }
+    /* Perform any backend-specific stream initialization */
+    status = dev->backend->init_stream(lstream, num_transfers);
+
+    if (status < 0) {
+        async_deinit_stream(lstream);
+        *stream = NULL;
+    } else {
+        /* Update the caller's pointers */
+        *stream = lstream;
+
+        if (buffers) {
+            *buffers = lstream->buffers;
         }
     }
 
+out:
     return status;
+
+freemem:
+    /* Clean up everything we've allocated if we hit any errors */
+    if (lstream->buffers) {
+        for (i = 0; i < num_buffers; i++)
+            free(lstream->buffers[i]);
+        free(lstream->buffers);
+    }
+    free(lstream);
+
+    goto out;
 }
 
 int async_set_transfer_timeout(struct bladerf_stream *stream,
@@ -271,13 +278,14 @@ void async_deinit_stream(struct bladerf_stream *stream)
     /* Free up the backend data */
     stream->dev->backend->deinit_stream(stream);
 
-    /* Free up the buffers */
-    for (i = 0; i < stream->num_buffers; i++) {
-        free(stream->buffers[i]);
+    if (stream->buffers) {
+        /* Free up the buffers */
+        for (i = 0; i < stream->num_buffers; i++) {
+            free(stream->buffers[i]);
+        }
+        /* Free up the pointer to the buffers */
+        free(stream->buffers);
     }
-
-    /* Free up the pointer to the buffers */
-    free(stream->buffers);
 
     /* Free up the stream itself */
     free(stream);
