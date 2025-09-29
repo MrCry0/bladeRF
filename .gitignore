@@ -62,3 +62,17 @@ __pycache__/
 *$py.class
 
 .vscode/
+
+# Debian package building files
+debian/.debhelper/
+debian/*.substvars
+debian/bladerf-firmware-fx3/
+debian/bladerf-fpga-hostedx*/
+debian/bladerf/
+debian/files
+debian/libbladerf-dev/
+debian/libbladerf-doc/
+debian/libbladerf-udev/
+debian/libbladerf2/
+debian/tmp/
+obj-x86_64-linux-gnu/
