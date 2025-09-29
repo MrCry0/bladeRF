@@ -1,3 +1,35 @@
+bladerf (2025.09-RC2-bumped) noble; urgency=medium
+
+  [ Major fixes ]
+  * libbladeRF:
+    - fix OC register from 0x54 to 0xD4 enabling both RX1 and RX2
+    - fix LTO
+    - fix packet format async stream to bytes
+    - fix rx meta packet timestamp and flags assignment
+
+  * hdl:
+    - add AD9361 and bladeRF 2.0 micro support headers to include path
+    - fix corrupted uat buffer with two writes before a read
+    - fix tx sample fifo reset false path assigns for x40 & x115 builds
+    - fix TX meta sample gap every gpif len when timestamp is META NOW
+    - fix late exit from TX meta down count state
+    - fix fifo_reader packet mode dma_downcount off-by-one error
+
+  [ Major features ]
+  * fx3_firmware:
+    - increase DMA buffer sizes for USB throughput bottleneck
+
+  * bladeRF-fsk: move into its own repo
+  * add sc16q11 packed format support to bladeRF-cli, libbladeRF, hdl
+  * libbladeRF: bump version to 2.6.0
+  * firmware: bump version to 2.6.0
+  * fpga: bump version to 0.16.0
+  * bladeRF-cli: bump version to 1.10.0
+  * python: bump version to 1.4.0
+  * matlab: bump version to 1.1.0
+
+ -- Oleksandr Cryo Suvorov <osuvorov@gnassass.com> Mon Sep 29 12:35:48 EEST 2025
+
 bladerf (2024.07) noble; urgency=medium
 
   * 2024.07 Release 2024.07
