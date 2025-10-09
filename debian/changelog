@@ -1,3 +1,30 @@
+bladerf (2025.10) plucky; urgency=medium
+
+  * Release for 2025.10 tag
+  * libbladeRF:
+    * Add SC16Q11 packed format support for improved bandwidth efficiency
+    * Add comprehensive gain calibration system with CSV import/export
+    * Add RX reordering and prime worker before RX enable
+    * Add oversample feature with configurable gain controls
+    * Improve GPIF buffer size support with larger 2048 sample buffers
+    * Add cross-platform threading support (removed libpthreadswin32 dependency)
+    * Add extensive test suite and regression testing framework
+    * Fix various sync TX/RX initialization and timing issues
+  * FPGA:
+    * Add SC16Q11 packed format support to FIFO reader and writer
+    * Add larger GPIF buffer support for improved USB throughput
+    * Fix RX/TX DMA request prioritization and meta timestamp handling
+    * Add system and FX3 PLL clock control blocks
+    * Fix timing issues and improve signal integrity
+  * Tools:
+    * Add bladeRF-power utility for RF power measurements with CLI interface
+    * Add bladeRF-fsk project as separate submodule
+    * Add bladeRF-update utility for firmware and FPGA updates
+    * Improve cross-platform Windows build support
+    * Add comprehensive hardware-in-the-loop testing framework
+
+ -- Robert Ghilduta (Nuand LLC) <robert.ghilduta@nuand.com>  Thu, 09 Oct 2025 09:37:05 +0300
+
 bladerf (2024.07) noble; urgency=medium
 
   * 2024.07 Release 2024.07
