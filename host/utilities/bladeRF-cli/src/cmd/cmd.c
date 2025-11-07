@@ -358,17 +358,6 @@ static struct cmd const cmd_table[] = {
 };
 // clang-format on
 
-// clang-format off
-struct numeric_suffix const freq_suffixes[NUM_FREQ_SUFFIXES] = {
-    { "G",      1000 * 1000 * 1000 },
-    { "GHz",    1000 * 1000 * 1000 },
-    { "M",      1000 * 1000 },
-    { "MHz",    1000 * 1000 },
-    { "k",      1000 },
-    { "kHz",    1000 }
-};
-// clang-format on
-
 struct cmd const *get_cmd(char *name)
 {
     struct cmd const *rv = NULL;

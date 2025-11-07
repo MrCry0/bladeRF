@@ -6,7 +6,7 @@ set(INCLUDES
     ${BLADERF_HOST_COMMON_INCLUDE_DIRS}
 )
 
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 
 if(MSVC)
     set(INCLUDES ${INCLUDES} ${MSVC_C99_INCLUDES})

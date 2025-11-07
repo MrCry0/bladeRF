@@ -8,7 +8,7 @@ set(INCLUDES
     ${BLADERF_HOST_COMMON_INCLUDE_DIRS}
 )
 
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 if(NOT MSVC)
     set(LIBS ${LIBS} m)
 endif()

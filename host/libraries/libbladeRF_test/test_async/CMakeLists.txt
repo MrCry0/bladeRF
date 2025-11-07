@@ -12,4 +12,4 @@ endif()
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_async main.c)
-target_link_libraries(libbladeRF_test_async libbladerf_shared)
+target_link_libraries(libbladeRF_test_async libbladeRF)

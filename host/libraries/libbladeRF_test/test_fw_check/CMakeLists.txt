@@ -37,4 +37,4 @@ add_definitions(-DLIBBLADERF_SEARCH_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_fw_check ${SRC})
-target_link_libraries(libbladeRF_test_fw_check libbladerf_shared)
+target_link_libraries(libbladeRF_test_fw_check libbladeRF)

@@ -219,7 +219,7 @@ static int _do_set_bandwidth(struct cli_state *state,
     /* Parse bandwidth */
     bw =
         str2uint_suffix(arg, (unsigned int)range->min, (unsigned int)range->max,
-                        freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                        FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
 
     if (!ok) {
         cli_err_nnl(state, __FUNCTION__, "Invalid bandwidth (%s)\n", arg);
@@ -555,8 +555,8 @@ static int _do_set_frequency(struct cli_state *state,
     }
 
     /* Parse frequency */
-    freq = str2uint64_suffix(arg, range->min, range->max, freq_suffixes,
-                             NUM_FREQ_SUFFIXES, &ok);
+    freq = str2uint64_suffix(arg, range->min, range->max, FREQ_SUFFIXES,
+                             ARRAY_SIZE(FREQ_SUFFIXES), &ok);
     if (!ok) {
         cli_err_nnl(state, __FUNCTION__, "Invalid frequency (%s)\n", arg);
         rv = CLI_RET_INVPARAM;
@@ -1597,8 +1597,8 @@ int set_samplerate(struct cli_state *state, int argc, char **argv)
     /* Allow a value of zero to be specified for the integer portion
      * so that the entire value can be specified in num/den. libbladeRF
      * will return an error if the sample rate is invalid */
-    rate.integer = str2uint64_suffix(argv[idx], 0, UINT64_MAX, freq_suffixes,
-                                     NUM_FREQ_SUFFIXES, &ok);
+    rate.integer = str2uint64_suffix(argv[idx], 0, UINT64_MAX, FREQ_SUFFIXES,
+                                     ARRAY_SIZE(FREQ_SUFFIXES), &ok);
 
     /* Integer portion didn't make it */
     if (!ok) {
@@ -1612,8 +1612,8 @@ int set_samplerate(struct cli_state *state, int argc, char **argv)
     /* Take in num/den if they are present */
     if (argc == 5 || argc == 6) {
         idx++;
-        rate.num = str2uint64_suffix(argv[idx], 0, UINT64_MAX, freq_suffixes,
-                                     NUM_FREQ_SUFFIXES, &ok);
+        rate.num = str2uint64_suffix(argv[idx], 0, UINT64_MAX, FREQ_SUFFIXES,
+                                     ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             cli_err_nnl(state, argv[0],
                         "Invalid %s value in specified sample rate (%s)\n",
@@ -1625,8 +1625,8 @@ int set_samplerate(struct cli_state *state, int argc, char **argv)
 
     if (argc == 5 || argc == 6) {
         idx++;
-        rate.den = str2uint64_suffix(argv[idx], 1, UINT64_MAX, freq_suffixes,
-                                     NUM_FREQ_SUFFIXES, &ok);
+        rate.den = str2uint64_suffix(argv[idx], 1, UINT64_MAX, FREQ_SUFFIXES,
+                                     ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             cli_err_nnl(state, argv[0],
                         "Invalid %s value in specified sample rate (%s)\n",
@@ -1824,23 +1824,23 @@ int set_smb_mode(struct cli_state *state, int argc, char **argv)
         }
 
 
-        rate.integer = str2uint64_suffix(argv[3], 0, UINT64_MAX, freq_suffixes,
-                                         NUM_FREQ_SUFFIXES, &ok);
+        rate.integer = str2uint64_suffix(argv[3], 0, UINT64_MAX, FREQ_SUFFIXES,
+                                         ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             cli_err(state, argv[3], "Invalid integer frequency value.\n");
             return CLI_RET_INVPARAM;
         }
 
         if (argc == 6) {
-            rate.num = str2uint64_suffix(argv[4], 0, UINT64_MAX, freq_suffixes,
-                                         NUM_FREQ_SUFFIXES, &ok);
+            rate.num = str2uint64_suffix(argv[4], 0, UINT64_MAX, FREQ_SUFFIXES,
+                                         ARRAY_SIZE(FREQ_SUFFIXES), &ok);
             if (!ok) {
                 cli_err(state, argv[4], "Invalid frequency numerator value.\n");
                 return CLI_RET_INVPARAM;
             }
 
-            rate.den = str2uint64_suffix(argv[5], 1, UINT64_MAX, freq_suffixes,
-                                         NUM_FREQ_SUFFIXES, &ok);
+            rate.den = str2uint64_suffix(argv[5], 1, UINT64_MAX, FREQ_SUFFIXES,
+                                         ARRAY_SIZE(FREQ_SUFFIXES), &ok);
             if (!ok) {
                 cli_err(state, argv[5],
                         "Invalid frequency denominator value.\n");

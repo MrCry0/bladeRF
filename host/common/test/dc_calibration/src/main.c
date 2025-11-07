@@ -33,16 +33,6 @@
 #include "dc_calibration.h"
 #include "conversions.h"
 
-const struct numeric_suffix freq_suffixes[] = {
-    { "G",      1000 * 1000 * 1000 },
-    { "GHz",    1000 * 1000 * 1000 },
-    { "M",      1000 * 1000 },
-    { "MHz",    1000 * 1000 },
-    { "k",      1000 } ,
-    { "kHz",    1000 }
-};
-#define NUM_FREQ_SUFFIXES (sizeof(freq_suffixes) / sizeof(freq_suffixes[0]))
-
 void usage(const char *argv0) {
     printf("Usage: %s <LMS6 cal>\n", argv0);
     printf("Usage: %s <rx|tx> <frequency_low> [<step> <count>]\n", argv0);
@@ -117,7 +107,7 @@ int main(int argc, char *argv[])
 
         f_start = str2uint_suffix(argv[2],
                                   BLADERF_FREQUENCY_MIN, BLADERF_FREQUENCY_MAX,
-                                  freq_suffixes, NUM_FREQ_SUFFIXES,
+                                  FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES),
                                   &ok);
 
         if (!ok) {
@@ -145,7 +135,7 @@ int main(int argc, char *argv[])
             struct dc_calibration_params *p;
 
             f_inc = str2uint_suffix(argv[3], 1, UINT_MAX,
-                                    freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                    FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
             if (!ok) {
                 fprintf(stderr, "Invalid frequency increment: %s\n", argv[3]);
                 status = EXIT_FAILURE;

@@ -93,14 +93,6 @@ static struct option const long_options[] = {
     { NULL, 0, NULL, 0 },
 };
 
-static struct numeric_suffix const freq_suffixes[] = {
-    { "K", 1000 },      { "kHz", 1000 },     { "M", 1000000 },
-    { "MHz", 1000000 }, { "G", 1000000000 }, { "GHz", 1000000000 },
-};
-
-static size_t const num_freq_suffixes =
-    sizeof(freq_suffixes) / sizeof(freq_suffixes[0]);
-
 static struct numeric_suffix const count_suffixes[] = {
     { "K", 1000 }, { "M", 1000000 }, { "G", 1000000000 },
 };
@@ -499,7 +491,7 @@ int main(int argc, char *argv[])
 
             case 's':
                 sample_rate = str2uint_suffix(
-                    optarg, 0, 61440000, freq_suffixes, num_freq_suffixes, &ok);
+                    optarg, 0, 61440000, FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
                 if (!ok) {
                     log_error("Invalid sample rate: %s\n", optarg);
                     return -1;

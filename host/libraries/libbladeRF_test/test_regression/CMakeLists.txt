@@ -84,7 +84,7 @@ add_custom_target(bitfile_ci
 
 target_link_libraries(
     ${PROJECT_NAME}
-    libbladerf_shared
+    libbladeRF
     gtest_main
     absl::strings
 )

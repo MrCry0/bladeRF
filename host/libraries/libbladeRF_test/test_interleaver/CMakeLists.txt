@@ -26,4 +26,4 @@ set(SRC
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_interleaver ${SRC})
-target_link_libraries(libbladeRF_test_interleaver libbladerf_shared)
+target_link_libraries(libbladeRF_test_interleaver libbladeRF)

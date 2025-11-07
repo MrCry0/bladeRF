@@ -52,15 +52,6 @@ const struct option long_options[] = {
     { "verbose",        no_argument,        0,          'v' },
 };
 
-const struct numeric_suffix freq_suffixes[] = {
-    { "K",   1000 },
-    { "kHz", 1000 },
-    { "M",   1000000 },
-    { "MHz", 1000000 },
-    { "G",   1000000000 },
-    { "GHz", 1000000000 },
-};
-
 const struct numeric_suffix count_suffixes[] = {
     { "K", 1000 },
     { "M", 1000000 },
@@ -113,8 +104,8 @@ int handle_cmdline(int argc, char *argv[], struct app_params *p)
                 p->samplerate = str2uint_suffix(optarg,
                                                 BLADERF_SAMPLERATE_MIN,
                                                 BLADERF_SAMPLERATE_REC_MAX,
-                                                freq_suffixes,
-                                                ARRAY_SIZE(freq_suffixes),
+                                                FREQ_SUFFIXES,
+                                                ARRAY_SIZE(FREQ_SUFFIXES),
                                                 &ok);
                 if (!ok) {
                     fprintf(stderr, "Invalid sample rate: %s\n", optarg);

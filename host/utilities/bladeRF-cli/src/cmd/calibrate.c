@@ -583,7 +583,7 @@ static int cal_table(struct cli_state *s, int argc, char **argv)
     if (argc >= 6) {
         f_min = str2uint_suffix(argv[4],
                                 BLADERF_FREQUENCY_MIN, BLADERF_FREQUENCY_MAX,
-                                freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
 
         if (!ok) {
             cli_err(s, argv[0], "Invalid min frequency (%s)\n", argv[4]);
@@ -592,7 +592,7 @@ static int cal_table(struct cli_state *s, int argc, char **argv)
 
         f_max = str2uint_suffix(argv[5],
                                 BLADERF_FREQUENCY_MIN, BLADERF_FREQUENCY_MAX,
-                                freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
 
         if (!ok) {
             cli_err(s, argv[0], "Invalid max frequency (%s)\n", argv[5]);
@@ -601,7 +601,7 @@ static int cal_table(struct cli_state *s, int argc, char **argv)
 
         if (argc >= 7) {
             f_inc = str2uint_suffix(argv[6], 1, BLADERF_FREQUENCY_MAX,
-                                    freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                    FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
 
             if (!ok) {
                 cli_err(s, argv[0],

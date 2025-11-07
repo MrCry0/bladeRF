@@ -35,7 +35,7 @@ include_directories(${TEST_REPEATER_INCLUDE})
 add_executable(libbladeRF_test_repeater ${TEST_REPEATER_SRC})
 
 set(TEST_REPEATER_LIBS
-        libbladerf_shared
+        libbladeRF
         ${CMAKE_THREAD_LIBS_INIT})
 
 target_link_libraries(libbladeRF_test_repeater

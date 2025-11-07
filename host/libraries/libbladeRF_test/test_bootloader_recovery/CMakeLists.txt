@@ -14,5 +14,5 @@ set(SRC main.c ${BLADERF_HOST_COMMON_SOURCE_DIR}/conversions.c)
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_bootloader_recovery ${SRC})
-target_link_libraries(libbladeRF_test_bootloader_recovery libbladerf_shared)
+target_link_libraries(libbladeRF_test_bootloader_recovery libbladeRF)
 

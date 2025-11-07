@@ -45,18 +45,6 @@ static struct option long_options[] = {
     { 0,                0,                  0,  0},
 };
 
-static const struct numeric_suffix FREQ_SUFFIXES[] = {
-    { "G",      1000 * 1000 * 1000 },
-    { "GHz",    1000 * 1000 * 1000 },
-    { "M",      1000 * 1000 },
-    { "MHz",    1000 * 1000 },
-    { "k",      1000 } ,
-    { "kHz",    1000 }
-};
-
-static const int NUM_FREQ_SUFFIXES =
-        sizeof(FREQ_SUFFIXES) / sizeof(struct numeric_suffix);
-
 static void usage(const char *argv0)
 {
     printf("Simple full duplex repeater test\n\n");
@@ -119,7 +107,7 @@ static int handle_args(int argc, char *argv[], struct repeater_config *config)
 
             case 't':
                 config->tx_freq = str2uint_suffix(optarg, 1, INT_MAX,
-                                    FREQ_SUFFIXES, NUM_FREQ_SUFFIXES, &conv_ok);
+                                    FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &conv_ok);
 
                 if (!conv_ok) {
                     fprintf(stderr, "\nError: Invalid TX frequency: %d\n\n",
@@ -130,7 +118,7 @@ static int handle_args(int argc, char *argv[], struct repeater_config *config)
 
             case 'r':
                 config->rx_freq = str2uint_suffix(optarg, 1, INT_MAX,
-                                    FREQ_SUFFIXES, NUM_FREQ_SUFFIXES, &conv_ok);
+                                    FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &conv_ok);
 
                 if (!conv_ok) {
                     fprintf(stderr, "\nError: Invalid RX frequency: %d\n\n",
@@ -141,7 +129,7 @@ static int handle_args(int argc, char *argv[], struct repeater_config *config)
 
             case 's':
                 config->sample_rate = str2uint_suffix(optarg, 1, INT_MAX,
-                                        FREQ_SUFFIXES, NUM_FREQ_SUFFIXES,
+                                        FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES),
                                         &conv_ok);
                 if (!conv_ok) {
                     fprintf(stderr, "\nError: Invalid sample rate: %d\n",
@@ -151,7 +139,7 @@ static int handle_args(int argc, char *argv[], struct repeater_config *config)
 
             case 'b':
                 config->bandwidth = str2uint_suffix(optarg, 1, INT_MAX,
-                                        FREQ_SUFFIXES, NUM_FREQ_SUFFIXES,
+                                        FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES),
                                         &conv_ok);
                 if (!conv_ok) {
                     fprintf(stderr, "\nError: Invalid bandwidth: %d\n",

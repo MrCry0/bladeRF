@@ -29,7 +29,7 @@ add_executable(bladeRF-update
 )
 
 # Add libbladeRF to the list of libraries
-list(APPEND LIBS libbladerf_shared)
+list(APPEND LIBS libbladeRF)
 
 target_link_libraries(bladeRF-update ${LIBS})
 target_include_directories(bladeRF-update PUBLIC ${INCLUDES})

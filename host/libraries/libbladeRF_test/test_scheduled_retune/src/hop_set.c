@@ -31,18 +31,6 @@
 
 #define INC 16
 
-static const struct numeric_suffix freq_suffix[] = {
-    { FIELD_INIT(.suffix, "k"), FIELD_INIT(.multiplier, 1000) },
-    { FIELD_INIT(.suffix, "K"), FIELD_INIT(.multiplier, 1000) },
-    { FIELD_INIT(.suffix, "m"), FIELD_INIT(.multiplier, 1000 * 1000) },
-    { FIELD_INIT(.suffix, "M"), FIELD_INIT(.multiplier, 1000 * 1000) },
-    { FIELD_INIT(.suffix, "g"), FIELD_INIT(.multiplier, 1000 * 1000 * 1000) },
-    { FIELD_INIT(.suffix, "G"), FIELD_INIT(.multiplier, 1000 * 1000 * 1000) },
-};
-
-static const size_t freq_suffix_count =
-                            sizeof(freq_suffix) / sizeof(freq_suffix[0]);
-
 static inline char * strip_chars(char *str)
 {
     size_t i;
@@ -151,7 +139,8 @@ struct hop_set * hop_set_load(const char *filename)
             h->params[h->count].f = str2uint_suffix(buf,
                                                   BLADERF_FREQUENCY_MIN,
                                                   BLADERF_FREQUENCY_MAX,
-                                                  freq_suffix, freq_suffix_count,
+                                                  FREQ_SUFFIXES,
+						  ARRAY_SIZE(FREQ_SUFFIXES),
                                                   &ok);
             if (!ok) {
                 fprintf(stderr, "Invalid frequency value: %s\n", buf);

@@ -26,7 +26,7 @@ endif()
 include_directories(${INCLUDES})
 add_executable(${PROJECT_NAME} ${SRC})
 target_link_libraries(${PROJECT_NAME}
-    libbladerf_shared
+    libbladeRF
 )
 
 # Only link with the math library on non-Windows platforms

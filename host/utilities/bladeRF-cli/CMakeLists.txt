@@ -257,7 +257,7 @@ add_executable(bladeRF-cli ${BLADERF_CLI_SOURCE})
 # Build configuration
 ################################################################################
 set(CLI_LINK_LIBRARIES
-    libbladerf_shared
+    libbladeRF
     ${CMAKE_THREAD_LIBS_INIT}
 )
 

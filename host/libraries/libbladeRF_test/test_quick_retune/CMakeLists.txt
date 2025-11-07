@@ -10,7 +10,7 @@ if(MSVC)
     set(INCLUDES ${INCLUDES} ${MSVC_C99_INCLUDES})
 endif()
 
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 
 set(SRC
         main.c

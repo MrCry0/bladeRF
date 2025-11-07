@@ -16,4 +16,4 @@ add_executable(libbladeRF_test_parse
     ${BLADERF_HOST_COMMON_SOURCE_DIR}/conversions.c
     ${BLADERF_HOST_COMMON_SOURCE_DIR}/parse.c
 )
-target_link_libraries(libbladeRF_test_parse libbladerf_shared)
+target_link_libraries(libbladeRF_test_parse libbladeRF)

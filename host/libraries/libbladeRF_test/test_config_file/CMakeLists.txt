@@ -31,7 +31,7 @@ set(SRC
     ${BLADERF_FPGA_COMMON_SOURCE_DIR}/lms.c
 )
 
-set(TEST_CONFIG_FILE_LIBS libbladerf_shared)
+set(TEST_CONFIG_FILE_LIBS libbladeRF)
 
 if(MSVC)
     set(TEST_CONFIG_FILE_INCLUDES

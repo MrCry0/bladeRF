@@ -87,8 +87,8 @@ int main(int argc, char *argv[])
                 break;
 
             case 'f':
-                test.frequency = str2uint64_suffix(optarg, 0, UINT64_MAX, freq_suffixes,
-                    NUM_FREQ_SUFFIXES, &ok);
+                test.frequency = str2uint64_suffix(optarg, 0, UINT64_MAX, FREQ_SUFFIXES,
+                    ARRAY_SIZE(FREQ_SUFFIXES), &ok);
                 printf("Frequency: %" PRIu64 "\n", test.frequency);
                 break;
 
@@ -107,8 +107,8 @@ int main(int argc, char *argv[])
                 break;
 
             case 's':
-                test.samp_rate = str2uint_suffix(optarg, 0, UINT32_MAX, freq_suffixes,
-                    NUM_FREQ_SUFFIXES, &ok);
+                test.samp_rate = str2uint_suffix(optarg, 0, UINT32_MAX, FREQ_SUFFIXES,
+                    ARRAY_SIZE(FREQ_SUFFIXES), &ok);
                 printf("Sample rate: %i\nHz", test.samp_rate);
                 break;
 

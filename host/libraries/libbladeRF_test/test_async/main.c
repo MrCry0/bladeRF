@@ -27,6 +27,7 @@
 #include <limits.h>
 #include <sys/types.h>
 #include <libbladeRF.h>
+#include "conversions.h"
 
 #ifndef DATA_SOURCE
 #   define DATA_SOURCE "/dev/urandom"
@@ -46,30 +47,6 @@ struct test_data
     FILE                *fout;          /* Output file (RX only) */
     ssize_t             samples_left;   /* Number of samples left */
 };
-
-int str2int(const char *str, int min, int max, bool *ok)
-{
-    long value;
-    char *endptr;
-
-    errno = 0;
-    value = strtol(str, &endptr, 0);
-
-    if (errno != 0 || value < (long)min || value > (long)max ||
-        endptr == str || *endptr != '\0') {
-
-        if (ok) {
-            *ok = false;
-        }
-
-        return 0;
-    }
-
-    if (ok) {
-        *ok = true;
-    }
-    return (int)value;
-}
 
 void *stream_callback(struct bladerf *dev, struct bladerf_stream *stream,
                       struct bladerf_metadata *metadata, void *samples,

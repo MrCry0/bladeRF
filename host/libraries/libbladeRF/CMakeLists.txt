@@ -420,7 +420,7 @@ endif()
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.20)
     cmake_policy(SET CMP0115 NEW)
 endif(CMAKE_VERSION VERSION_GREATER_EQUAL 3.20)
-add_library(libbladerf_shared SHARED ${LIBBLADERF_SOURCE})
+add_library(libbladeRF ${LIBBLADERF_SOURCE})
 
 
 ################################################################################
@@ -439,16 +439,21 @@ if(ENABLE_BACKEND_CYAPI)
     set(LIBBLADERF_LIBS ${LIBBLADERF_LIBS} ${CYAPI_LIBRARIES})
 endif(ENABLE_BACKEND_CYAPI)
 
-target_link_libraries(libbladerf_shared ${LIBBLADERF_LIBS})
+target_link_libraries(libbladeRF ${LIBBLADERF_LIBS})
 
 # Adjust our output name
-set_target_properties(libbladerf_shared PROPERTIES OUTPUT_NAME bladeRF)
+set_target_properties(libbladeRF PROPERTIES OUTPUT_NAME bladeRF)
 
 # Set shared library version
-set_target_properties(libbladerf_shared PROPERTIES SOVERSION ${VERSION_INFO_MAJOR})
+if(BUILD_SHARED_LIBS)
+    set_target_properties(libbladeRF PROPERTIES
+        VERSION ${LIBBLADERF_VERSION}
+        SOVERSION ${VERSION_INFO_MAJOR}
+    )
+endif()
 
 include(Shortfile)
-define_file_basename_for_sources(libbladerf_shared)
+define_file_basename_for_sources(libbladeRF)
 
 
 ################################################################################
@@ -504,7 +509,7 @@ endif(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 # Library installation information
 ################################################################################
 
-install(TARGETS libbladerf_shared
+install(TARGETS libbladeRF
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} # .so/.dylib
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} # .a/.lib
     RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR} # .dll

@@ -32,7 +32,7 @@ add_executable(${PROJECT_NAME}
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror)
 target_link_libraries(${PROJECT_NAME}
-    libbladerf_shared
+    libbladeRF
     m
     ${BLADERF_HOST_COMMON_LIBRARIES}
     ${CURSES_LIBRARIES}

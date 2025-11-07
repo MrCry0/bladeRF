@@ -9,7 +9,7 @@ set(SRC
     ${BLADERF_HOST_COMMON_SOURCE_DIR}/conversions.c
     src/main.c)
 
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 
 if(MSVC)
     set(INCLUDES ${INCLUDES} ${MSVC_C99_INCLUDES})

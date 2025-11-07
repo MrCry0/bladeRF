@@ -20,5 +20,5 @@ endif()
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_open ${SRC})
-target_link_libraries(libbladeRF_test_open libbladerf_shared)
+target_link_libraries(libbladeRF_test_open libbladeRF)
 

@@ -8,5 +8,5 @@ endif()
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_c main.c)
-target_link_libraries(libbladeRF_test_c libbladerf_shared)
+target_link_libraries(libbladeRF_test_c libbladeRF)
 

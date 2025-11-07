@@ -8,4 +8,4 @@ endif()
 
 include_directories(${INCLUDES})
 add_executable(libbladeRF_test_version src/main.c)
-target_link_libraries(libbladeRF_test_version libbladerf_shared)
+target_link_libraries(libbladeRF_test_version libbladeRF)

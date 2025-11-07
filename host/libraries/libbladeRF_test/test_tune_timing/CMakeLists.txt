@@ -29,5 +29,5 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
     include_directories(${INCLUDES})
     add_executable(libbladeRF_test_tune_timing ${SRC})
-    target_link_libraries(libbladeRF_test_tune_timing libbladerf_shared)
+    target_link_libraries(libbladeRF_test_tune_timing libbladeRF)
 endif()

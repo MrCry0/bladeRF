@@ -107,8 +107,8 @@ int cmd_mimo(struct cli_state *state, int argc, char **argv)
             unsigned int freq, actual;
             bool ok;
             freq = str2uint_suffix(argv[2], BLADERF_SMB_FREQUENCY_MIN,
-                                   BLADERF_SMB_FREQUENCY_MAX, freq_suffixes,
-                                   NUM_FREQ_SUFFIXES, &ok);
+                                   BLADERF_SMB_FREQUENCY_MAX, FREQ_SUFFIXES,
+                                   ARRAY_SIZE(FREQ_SUFFIXES), &ok);
             if (!ok) {
                 cli_err(state, argv[0], "Invalid SMB frequency (%s)\n",
                         argv[2]);

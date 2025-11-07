@@ -65,17 +65,6 @@ const struct option long_options[] = {
     { 0,                0,                  0,  0   },
 };
 
-const struct numeric_suffix freq_suffixes[] = {
-    { "K",   1000 },
-    { "kHz", 1000 },
-    { "M",   1000000 },
-    { "MHz", 1000000 },
-    { "G",   1000000000 },
-    { "GHz", 1000000000 },
-};
-
-const unsigned int num_freq_suffixes = sizeof(freq_suffixes) / sizeof(freq_suffixes[0]);
-
 const struct numeric_suffix size_suffixes[] = {
     { "K",  1024 },
     { "M",  1024 * 1024 },
@@ -196,8 +185,8 @@ int handle_cmdline(int argc, char *argv[], struct test_params *p)
                 p->samplerate = str2uint_suffix(optarg,
                                                 BLADERF_SAMPLERATE_MIN,
                                                 BLADERF_SAMPLERATE_REC_MAX,
-                                                freq_suffixes,
-                                                num_freq_suffixes,
+                                                FREQ_SUFFIXES,
+                                                ARRAY_SIZE(FREQ_SUFFIXES),
                                                 &ok);
                 if (!ok) {
                     log_error("Invalid sample rate: %s\n", optarg);
@@ -209,8 +198,8 @@ int handle_cmdline(int argc, char *argv[], struct test_params *p)
                 p->frequency = str2uint_suffix(optarg,
                                                BLADERF_FREQUENCY_MIN,
                                                BLADERF_FREQUENCY_MAX,
-                                               freq_suffixes,
-                                               num_freq_suffixes,
+                                               FREQ_SUFFIXES,
+                                               ARRAY_SIZE(FREQ_SUFFIXES),
                                                &ok);
                 if (!ok) {
                     log_error("Invalid frequency: %s\n", optarg);

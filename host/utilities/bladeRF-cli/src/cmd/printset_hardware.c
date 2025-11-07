@@ -353,8 +353,8 @@ int set_refin_freq(struct cli_state *state, int argc, char **argv)
     }
 
     /* Parse frequency */
-    freq = str2uint64_suffix(argv[2], range->min, range->max, freq_suffixes,
-                             NUM_FREQ_SUFFIXES, &ok);
+    freq = str2uint64_suffix(argv[2], range->min, range->max, FREQ_SUFFIXES,
+                             ARRAY_SIZE(FREQ_SUFFIXES), &ok);
     if (!ok) {
         cli_err_nnl(state, argv[0], "Invalid refin_freq value (%s)\n", argv[2]);
         rv = CLI_RET_INVPARAM;

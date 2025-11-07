@@ -352,6 +352,17 @@ struct numeric_suffix {
 };
 typedef struct numeric_suffix numeric_suffix;
 
+// extern const struct numeric_suffix FREQ_SUFFIXES[];
+static const struct numeric_suffix FREQ_SUFFIXES[] = {
+    { "G",      1000 * 1000 * 1000 },
+    { "GHz",    1000 * 1000 * 1000 },
+    { "M",      1000 * 1000 },
+    { "MHz",    1000 * 1000 },
+    { "k",      1000 } ,
+    { "kHz",    1000 }
+};
+
+
 /**
  * Convert an ASCII char string that has a suffix multipler to an unsigned
  * integer and check its bounds

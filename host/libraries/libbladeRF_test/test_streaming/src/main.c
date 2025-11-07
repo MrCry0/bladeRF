@@ -57,16 +57,6 @@ void print_config(const test_config *config, const char *device_string, const ch
 }
 
 
-// Define suffix table for engineering notation
-static const struct numeric_suffix freq_suffixes[] = {
-    { "K", 1000 },
-    { "k", 1000 },
-    { "M", 1000000 },
-    { "m", 1000000 },
-    { "G", 1000000000 },
-    { "g", 1000000000 },
-};
-
 void print_bladerf_flag_statuses(uint32_t flags) {
     printf("BladeRF Flag Statuses:\n");
     printf("%-40s %d\n", "BLADERF_META_STATUS_OVERRUN:", !!(flags & BLADERF_META_STATUS_OVERRUN));
@@ -180,8 +170,8 @@ int main(int argc, char *argv[])
                 break;
             case 'n':
                 config.num_samples = str2uint64_suffix(
-                    optarg, 1, UINT64_MAX, freq_suffixes,
-                    sizeof(freq_suffixes) / sizeof(freq_suffixes[0]), &ok);
+                    optarg, 1, UINT64_MAX, FREQ_SUFFIXES,
+                    ARRAY_SIZE(FREQ_SUFFIXES), &ok);
                 if (!ok) {
                     fprintf(stderr, "Invalid number of samples: %s\n", optarg);
                     exit(EXIT_FAILURE);
@@ -200,8 +190,8 @@ int main(int argc, char *argv[])
                 break;
             case 's':
                 config.sample_rate = str2uint64_suffix(
-                    optarg, 0, UINT64_MAX, freq_suffixes,
-                    sizeof(freq_suffixes) / sizeof(freq_suffixes[0]), &ok);
+                    optarg, 0, UINT64_MAX, FREQ_SUFFIXES,
+                    ARRAY_SIZE(FREQ_SUFFIXES), &ok);
                 if (!ok) {
                     fprintf(stderr, "Invalid sample rate: %s\n", optarg);
                     exit(EXIT_FAILURE);

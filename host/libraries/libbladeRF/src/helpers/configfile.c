@@ -30,13 +30,6 @@
 /* Config file stuff */
 /******************************************************************************/
 
-const struct numeric_suffix freq_suffixes[] = { { "G", 1000 * 1000 * 1000 },
-                                                { "GHz", 1000 * 1000 * 1000 },
-                                                { "M", 1000 * 1000 },
-                                                { "MHz", 1000 * 1000 },
-                                                { "k", 1000 },
-                                                { "kHz", 1000 } };
-#define NUM_FREQ_SUFFIXES (sizeof(freq_suffixes) / sizeof(freq_suffixes[0]))
 #define MAX(a, b) (a > b ? a : b)
 #define MIN(a, b) (a < b ? a : b)
 
@@ -103,7 +96,7 @@ static int apply_config_options(struct bladerf *dev, struct config_options opt)
 
         freq = str2uint64_suffix(opt.value, MAX(rx_range->min, tx_range->min),
                                  MIN(rx_range->max, tx_range->max),
-                                 freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                 FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             return BLADERF_ERR_INVAL;
         }
@@ -129,7 +122,7 @@ static int apply_config_options(struct bladerf *dev, struct config_options opt)
 
         freq = str2uint64_suffix(opt.value, MAX(rx_range->min, tx_range->min),
                                  MIN(rx_range->max, tx_range->max),
-                                 freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                 FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             return BLADERF_ERR_INVAL;
         }
@@ -165,8 +158,8 @@ static int apply_config_options(struct bladerf *dev, struct config_options opt)
 
         bw = str2uint_suffix(
             opt.value, (bladerf_bandwidth)MAX(rx_range->min, tx_range->min),
-            (bladerf_bandwidth)MIN(rx_range->max, tx_range->max), freq_suffixes,
-            NUM_FREQ_SUFFIXES, &ok);
+            (bladerf_bandwidth)MIN(rx_range->max, tx_range->max), FREQ_SUFFIXES,
+            ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             return BLADERF_ERR_INVAL;
         }
@@ -244,7 +237,7 @@ static int apply_config_options(struct bladerf *dev, struct config_options opt)
         }
 
         freq = str2uint64_suffix(opt.value, rx_range->min, rx_range->max,
-                                 freq_suffixes, NUM_FREQ_SUFFIXES, &ok);
+                                 FREQ_SUFFIXES, ARRAY_SIZE(FREQ_SUFFIXES), &ok);
         if (!ok) {
             return BLADERF_ERR_INVAL;
         }

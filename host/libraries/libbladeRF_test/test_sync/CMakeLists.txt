@@ -10,7 +10,7 @@ if(MSVC)
     set(TEST_SYNC_INCLUDES ${TEST_SYNC_INCLUDES} ${MSVC_C99_INCLUDES})
 endif()
 
-set(TEST_SYNC_LIBS libbladerf_shared)
+set(TEST_SYNC_LIBS libbladeRF)
 
 if(NOT MSVC)
     find_package(Threads REQUIRED)

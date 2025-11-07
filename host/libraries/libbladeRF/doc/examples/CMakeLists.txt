@@ -5,7 +5,7 @@ set(INCLUDES
     ${libbladeRF_SOURCE_DIR}/include
     ${BLADERF_HOST_COMMON_SOURCE_DIR}/include
 )
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 
 set(SRC
     ${BLADERF_HOST_COMMON_SOURCE_DIR}/conversions.c

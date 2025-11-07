@@ -7,7 +7,7 @@ set(INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/include
 )
 
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 
 if(MSVC)
     set(INCLUDES ${INCLUDES} ${MSVC_C99_INCLUDES})

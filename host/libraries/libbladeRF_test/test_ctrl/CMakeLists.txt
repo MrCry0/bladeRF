@@ -11,7 +11,7 @@ if(MSVC)
     set(INCLUDES ${INCLUDES} ${MSVC_C99_INCLUDES})
 endif()
 
-set(LIBS libbladerf_shared)
+set(LIBS libbladeRF)
 
 if(NOT MSVC)
     find_package(Threads REQUIRED)
