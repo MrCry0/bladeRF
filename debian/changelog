@@ -1,3 +1,24 @@
+bladerf (2026.05-1) unstable; urgency=medium
+
+  * New upstream release 2026.05
+    - Fix multi-device TX mute state handling in libbladeRF
+    - Restrict txmute helpers to NIOS-only builds
+    - Add LZMA-compressed FPGA autoload support for bladeRF1
+    - Add Renesas AT25FF321A SPI flash and OTP support
+    - Add SPI flash validation and regression tests
+    - Improve bladeRF2 AD9361 recalibration and RF path safety
+    - Preserve active RF path during shared-LO retunes
+    - Add shell completion support for bladeRF utilities
+    - Improve Quartus/Qsys compatibility on newer glibc
+    - Improve Docker openSUSE build reliability
+    - Fix bladeRF-cli flash parsing and serial validation
+    - Fix GCC 15 const-correctness warnings
+    - Add dedicated SPI flash erase timeout handling
+    - Standardize minimum required CMake version to 3.10
+    - Fix macOS regression tests and assorted tooling issues
+
+ -- Oleksandr Suvorov <cryosay@gmail.com>  Fri, 23 May 2026 12:01:00 +0000
+
 bladerf (2025.10) plucky; urgency=medium
 
   * Release for 2025.10 tag
