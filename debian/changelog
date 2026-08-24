@@ -1,3 +1,18 @@
+bladerf (2026.08-1) unstable; urgency=medium
+
+  * New upstream release 2026.08
+    - Add packed asynchronous stream support to libbladeRF
+    - Configure stream formats before enabling the async module
+    - Add packed asynchronous RX example and documentation
+    - Add regression tests for packed asynchronous streams
+    - Revert bladeRF2 TX SPDT gating during AD9361 rate/bandwidth updates
+    - Revert bladeRF2 FPGA TX guard during AD9361 recalibration updates
+    - Clean Quartus work directories by default for HDL builds
+    - Use Quartus 23.1 for HDL regression builds
+    - Fix GPIF simulation clock drift on Questa 2023.3
+
+ -- Oleksandr Suvorov <cryosay@gmail.com>  Mon, 24 Aug 2026 08:29:02 +0000
+
 bladerf (2026.05-1) unstable; urgency=medium
 
   * New upstream release 2026.05
